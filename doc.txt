@@ -1,0 +1,165 @@
+SHEET
+https://golang.sk/images/blog/cheatsheets/go-cheat-sheet.pdf
+
+
+
+
+
+
+FUNCTIONS
+func pow(x, n, lim float64) float64 {
+	if v := math.Pow(x, n); v < lim {
+		return v
+	}
+	return lim
+}
+
+
+
+Constants
+Constants are declared like variables, but with the const keyword.
+
+Outside a function, every statement begins with a keyword (var, func, and so on) and so the := construct is not available.
+
+bool
+string
+int  int8  int16  int32  int64
+uint uint8 uint16 uint32 uint64 uintptr
+byte // alias for uint8
+rune // alias for int32
+     // represents a Unicode code point
+float32 float64
+complex64 complex128
+
+int8    –128 to 127
+int16   –32768 to 32767
+int32   –2147483648 to 2147483647
+int64   –9223372036854775808 to 9223372036854775807
+uint8  0 to 255
+uint16 0 to 65536
+uint32 0 to 42949672
+uint64 0 to 18446744073709551615
+
+Some numeric conversions:
+
+var i int = 42
+var f float64 = float64(i)
+var u uint = uint(f)
+Or, put more simply:
+
+i := 42
+f := float64(i)
+u := uint(f)
+
+ARRAY
+var x = [3]int{10, 20, 30}
+
+If you have a sparse array (an array where most elements are set to their zero value), you can specify only the indices with values in the array literal:
+var x = [12]int{1, 5: 4, 6, 10: 100, 15}
+
+When using an array literal to initialize an array, you can leave off the number and use … instead:
+var x = [...]int{10, 20, 30}
+
+the built-in function len takes in an array and returns its length
+
+
+
+CONTROL FLOW
+
+for i := 0; i < 10; i++ {
+    sum += i
+}
+
+//The init and post statements are optional.
+for ; sum < 1000; {
+		sum += sum
+}
+
+//At that point you can drop the semicolons: C's while is spelled for in Go.
+for sum < 1000 {
+		sum += sum
+}
+
+//infinite loop
+for {
+}
+
+if x < 0 {
+    return sqrt(-x) + "i"
+}
+
+Like for, the if statement can start with a short statement to execute before the condition.
+Variables declared by the statement are only in scope until the end of the if.
+
+if v := math.Pow(x, n); v < lim {
+    return v
+}
+
+Variables declared inside an if short statement are also available inside any of the else blocks.
+if v := math.Pow(x, n); v < lim {
+    return v
+} else {
+    fmt.Printf("%g >= %g\n", v, lim)
+}
+
+A switch statement is a shorter way to write a sequence of if - else statements. It runs the first case whose value is equal to the condition expression.
+
+import (
+	"fmt"
+	"runtime"
+)
+func main() {
+	fmt.Print("Go runs on ")
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("OS X.")
+	case "linux":
+		fmt.Println("Linux.")
+	default:
+		// freebsd, openbsd,
+		// plan9, windows...
+		fmt.Printf("%s.\n", os)
+	}
+}
+
+Switch without a condition is the same as switch true.
+
+func main() {
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("Good morning!")
+	case t.Hour() < 17:
+		fmt.Println("Good afternoon.")
+	default:
+		fmt.Println("Good evening.")
+	}
+}
+
+A defer statement defers the execution of a function until the surrounding function returns.
+
+func main() {
+	defer fmt.Println("world")
+	fmt.Println("hello")
+}
+
+POINTERS
+
+Go has pointers. A pointer holds the memory address of a value.
+The type *T is a pointer to a T value. Its zero value is nil.
+
+var p *int
+
+i := 42
+p = &i
+
+
+A struct is a collection of fields.
+type Vertex struct {
+	X int
+	Y int
+}
+
+func main() {
+	fmt.Println(Vertex{1, 2})
+}
