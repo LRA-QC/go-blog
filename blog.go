@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
 	"log"
@@ -10,7 +11,9 @@ import (
 	"os"
 
 	"github.com/LRA-QC/blog/woxcache"
+	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type PageVariables struct {
@@ -60,6 +63,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	db, errsql := sql.Open("sqlite3", "./foo.db")
+	fmt.Print(errsql)
+	defer db.Close()
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("Error loading .env file")
@@ -76,7 +82,9 @@ func main() {
 	url := fmt.Sprintf("http://%s:%s/", address, port)
 	fmt.Println("==> Starting WoxCMS server 🌍 " + version + " 🚀:" + url + "]")
 	fs := http.FileServer(http.Dir("static/"))
-	mux := http.NewServeMux()
+
+	//mux := http.NewServeMux()
+	mux := mux.NewRouter()
 
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 	mux.HandleFunc("/", indexHandler)
@@ -90,11 +98,10 @@ func main() {
 	res := woxcache.CacheGet("this_is_a_date")
 	fmt.Println("Cache entry for [this_is_a_date] result: " + res)
 	woxcache.CacheDump()
-	time.Sleep(30 * time.Second)
+	//	time.Sleep(30 * time.Second)
+	//	woxcache.CacheDump()
 
-	woxcache.CacheDump()
-
-	//http.ListenAndServe(address+":"+port, mux)
+	http.ListenAndServe(address+":"+port, mux)
 	//close cache ticker
 	close(done)
 }

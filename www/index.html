@@ -1,35 +1,59 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>News App Demo</title>
-    <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="utf-8" />
+
+    <title>HOME</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Damion&family=Lato:wght@400;700&family=Neuton&display=swap"
+        rel="stylesheet" />
+    <style>
+    .active {
+        text-decoration: underlines;
+        font-weight: bolders;
+        color: yellow;
+    }
+    </style>
+
+    <link rel="stylesheet" href="views/css/main.css?v=1.0" />
+
 </head>
-
 <body>
+    <div class="grid-container">
+        <div class="item1">
+            <header>
+                <h1>Luc Raymond.net</h1>
+                <nav class="nav justify-content-center">
+    <a class="nav-link <!--[-menuitem1_status-]-->" href="index.php?id=ea49222f-cd3b-48f7-8493-9b69f79d1921">Home</a>
+    <a class="nav-link <!--[-menuitem1_status-]-->" href="index.php?q=blog">Blog</a>
+    <a class="nav-link <!--[-menuitem1_status-]-->" href="index.php?q=blog">Wiki</a>
+    <a class="nav-link <!--[-menuitem2_status-]-->" href="index.php?q=photo">Photo</a>
+    <a class="nav-link <!--[-menuitem3_status-]-->" href="https://github.com/LRA-QC" target="_BLANK">Projects</a>
+    <a class="nav-link <!--[-menuitem5_status-]-->" href="index.php?id=5a6770a8-c042-4a27-95a9-7c102440afeb">About</a>
+</nav>            </header>
+        </div>
+        <div class="item3">
+            <article class="container" id="">
+                <h1> title -- HOME -- 2022  </h1>
+                Welcome to my web site, I'm posting tips and tricks and updates on some of my projects.
 
-    <main>
 
-        <header>
+            </article>
 
-            <a class="logo" href="/">News Demo</a>
-
-            <form action="/search" method="GET">
-
-                <input autofocus class="search-input" value="" placeholder="Enter a news topic" type="search"
-                    name="q" />
-
-            </form>
-
-            <a href="https://github.com/freshman-tech/news" class="button github-button">View on GitHub</a>
-
-        </header>
-
-    </main>
-
+        </div>
+        <div class="item4">
+            <footer>
+    <div id="footer">
+        <span class="monospace">Made with WoxCore -- Copyright @
+            <!--[-date_year-]-->
+        </span>
+    </div>
+</footer>        </div>
+    </div>
 </body>
-
-</html>
+</html>*** CACHE ***
