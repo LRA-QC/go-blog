@@ -38,6 +38,7 @@ func startCacheTicker(f func()) chan bool {
 	}()
 	return done
 }
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	var p string
 
@@ -59,13 +60,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
 	err := godotenv.Load()
-
 	if err != nil {
 		log.Println("Error loading .env file")
 	}
-
 	address := os.Getenv("ADDRESS")
 	if address == "" {
 		address = "127.0.0.1"
@@ -76,9 +74,7 @@ func main() {
 	}
 
 	url := fmt.Sprintf("http://%s:%s/", address, port)
-
 	fmt.Println("==> Starting WoxCMS server 🌍 " + version + " 🚀:" + url + "]")
-
 	fs := http.FileServer(http.Dir("static/"))
 	mux := http.NewServeMux()
 
